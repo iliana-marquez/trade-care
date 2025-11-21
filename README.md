@@ -15,16 +15,21 @@ Many new traders lose money by following emotions, social-media hype from “inv
 - **Develop Skills:** Learn what drives successful trades through clear insights
 - **Stay Safe:** Avoid impulsive trading and misleading advice 
 
+> [!WARNING]  
+> **Important Disclaimer:** TradeCare is an educational tool for risk awareness and decision support. It does not provide financial advice and should not be used as the sole basis for trading decisions.
+
 # Dataset Content
 
-**Source:** GitHub - Bitcoin Hourly OHLCV Dataset  
+TradeCare uses publicly available cryptocurrency market data (OHLCV - Open, High, Low, Close, Volume) for Bitcoin (BTC-USD) with 1-hour candle intervals.
+
+**Source:** GitHub - Bitcoin Hourly OHLCV Dataset 
 **Repository:** https://github.com/mouadja02/bitcoin-hourly-ohclv-dataset  
-**Direct File:** btc-hourly-price_2015_2025.csv  
+**Direct File:** btc-hourly-price_2015_2025.csv (The dataset is updated automatically by the repository owner with new hourly data
+) 
 **Asset:** BTC-USD (Bitcoin to US Dollar)  
 **Timeframe:** 1-hour candlesticks  
 **Period:** 2015 - present  
-**Total Records:** ?
-**Size:** ?
+**Total Records & Size:** depend on the data by the time the notebooks are run
 
 ## Data Structure
 The dataset contains the following raw columns:
@@ -41,8 +46,34 @@ The dataset contains the following raw columns:
 | `VOLUME_FROM` | float | Trading volume in BTC | 1234.56 |
 | `VOLUME_TO` | float | Trading volume in USD | 389,456.78 |
 
+**Why This Dataset:**
+
+- Bitcoin represents high liquidity and 24/7 trading
+- Public data eliminates user-specific bias present in individual trade logs 
+- Sufficient volatility to demonstrate meaningful prediction capabilities
+- Clean, structured time-series data suitable for ML modeling
+
 ## Business Requirements
-* Describe your business requirements
+
+#### **BR1: Price Movement Prediction**
+
+- The client (beginner traders) needs to predict short-term Bitcoin price direction before entering a trade
+- Requires a regression model to predict percentage price change over the next 4 hours
+- Visual representation of predicted vs actual price movements with confidence interpretation
+
+#### **BR2: Trade Profitability Assessment**
+
+- The client needs to evaluate whether a potential trade setup is likely to be profitable
+- Requires a classification model to estimate probability of profit
+- Risk scoring system categorizing trades as Low/Medium/High risk
+- Explanation of factors influencing each prediction
+
+#### **BR3: Educational Risk Awareness**
+
+- The client needs to understand what drives predictions to avoid blind reliance on the model
+- Requires feature importance visualizations showing which technical indicators matter most
+- Model performance metrics demonstrating prediction reliability and limitations
+- Clear explanations preventing "magic formula" thinking and promoting critical evaluation
 
 
 ## Hypothesis and how to validate?
