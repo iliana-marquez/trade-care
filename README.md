@@ -19,7 +19,41 @@ Many new traders lose money by following emotions, social-media hype from “inv
 ## Dataset Content
 * This project uses **Bitcoin (BTC-USD) hourly candlestick data** sourced from **Coinbase**.
 
+# Dataset Content
 
+**Source:** GitHub - Bitcoin Hourly OHLCV Dataset  
+**Repository:** https://github.com/mouadja02/bitcoin-hourly-ohclv-dataset  
+**Direct File:** btc-hourly-price_2015_2025.csv  
+**Asset:** BTC-USD (Bitcoin to US Dollar)  
+**Timeframe:** 1-hour candlesticks  
+**Period:** 2015 - 2025  
+**Total Records:** ~87,600+ hourly candles  
+**Size:** ~15 MB  
+
+---
+**Source:** GitHub - Bitcoin Hourly OHLCV Dataset  
+**Repository:** https://github.com/mouadja02/bitcoin-hourly-ohclv-dataset  
+**Direct File:** btc-hourly-price_2015_2025.csv  
+**Asset:** BTC-USD (Bitcoin to US Dollar)  
+**Timeframe:** 1-hour candlesticks  
+**Period:** 2015 - 2025  
+**Total Records:** ~87,600+ hourly candles  
+
+
+## Data Structure
+The dataset contains the following raw columns:
+
+| Column | Data Type | Description | Example |
+|--------|-----------|-------------|---------|
+| `TIME_UNIX` | integer | Unix timestamp for the hour | 1420070400 |
+| `DATE_STR` | string | Human-readable date (YYYY-MM-DD) | 2015-01-01 |
+| `HOUR_STR` | string | Hour of the day (HH:MM:SS) | 00:00:00 |
+| `OPEN_PRICE` | float | Opening price at hour start (USD) | 314.25 |
+| `HIGH_PRICE` | float | Highest price during the hour (USD) | 318.50 |
+| `CLOSE_PRICE` | float | Closing price at hour end (USD) | 316.75 |
+| `LOW_PRICE` | float | Lowest price during the hour (USD) | 313.80 |
+| `VOLUME_FROM` | float | Trading volume in BTC | 1234.56 |
+| `VOLUME_TO` | float | Trading volume in USD | 389,456.78 |
 
 ## Business Requirements
 * Describe your business requirements
