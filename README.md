@@ -28,7 +28,7 @@ TradeCare uses publicly available cryptocurrency market data (OHLCV - Open, High
 ) 
 **Asset:** BTC-USD (Bitcoin to US Dollar)  
 **Timeframe:** 1-hour candlesticks  
-**Period:** 2015 - present  
+**Period:** December 2014 - present  
 **Total Records & Size:** depend on the data by the time the notebooks are run
 
 ## Data Structure
