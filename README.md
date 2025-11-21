@@ -15,10 +15,6 @@ Many new traders lose money by following emotions, social-media hype from “inv
 - **Develop Skills:** Learn what drives successful trades through clear insights
 - **Stay Safe:** Avoid impulsive trading and misleading advice 
 
-
-## Dataset Content
-* This project uses **Bitcoin (BTC-USD) hourly candlestick data** sourced from **Coinbase**.
-
 # Dataset Content
 
 **Source:** GitHub - Bitcoin Hourly OHLCV Dataset  
@@ -26,19 +22,9 @@ Many new traders lose money by following emotions, social-media hype from “inv
 **Direct File:** btc-hourly-price_2015_2025.csv  
 **Asset:** BTC-USD (Bitcoin to US Dollar)  
 **Timeframe:** 1-hour candlesticks  
-**Period:** 2015 - 2025  
-**Total Records:** ~87,600+ hourly candles  
-**Size:** ~15 MB  
-
----
-**Source:** GitHub - Bitcoin Hourly OHLCV Dataset  
-**Repository:** https://github.com/mouadja02/bitcoin-hourly-ohclv-dataset  
-**Direct File:** btc-hourly-price_2015_2025.csv  
-**Asset:** BTC-USD (Bitcoin to US Dollar)  
-**Timeframe:** 1-hour candlesticks  
-**Period:** 2015 - 2025  
-**Total Records:** ~87,600+ hourly candles  
-
+**Period:** 2015 - present  
+**Total Records:** ?
+**Size:** ?
 
 ## Data Structure
 The dataset contains the following raw columns:
