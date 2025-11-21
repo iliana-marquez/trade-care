@@ -34,41 +34,48 @@ TradeCare uses publicly available cryptocurrency market data (OHLCV - Open, High
 ## Data Structure
 The dataset contains the following raw columns:
 
-| Column | Data Type | Description | Example |
+| Column | Data Type | Description | Example (1st Entry) |
 |--------|-----------|-------------|---------|
-| `TIME_UNIX` | integer | Unix timestamp for the hour | 1420070400 |
-| `DATE_STR` | string | Human-readable date (YYYY-MM-DD) | 2015-01-01 |
-| `HOUR_STR` | string | Hour of the day (HH:MM:SS) | 00:00:00 |
-| `OPEN_PRICE` | float | Opening price at hour start (USD) | 314.25 |
-| `HIGH_PRICE` | float | Highest price during the hour (USD) | 318.50 |
-| `CLOSE_PRICE` | float | Closing price at hour end (USD) | 316.75 |
-| `LOW_PRICE` | float | Lowest price during the hour (USD) | 313.80 |
-| `VOLUME_FROM` | float | Trading volume in BTC | 1234.56 |
-| `VOLUME_TO` | float | Trading volume in USD | 389,456.78 |
+| `TIME_UNIX` | integer | Unix timestamp for the hour | 1416031200 |
+| `DATE_STR` | string | Human-readable date (YYYY-MM-DD) | 2014-11-15 |
+| `HOUR_STR` | string | Hour of the day | 6 |
+| `OPEN_PRICE` | float | Opening price at hour start (USD) | 395.88 |
+| `HIGH_PRICE` | float | Highest price during the hour (USD) | 398.12|
+| `CLOSE_PRICE` | float | Closing price at hour end (USD) | 396.15
+| `LOW_PRICE` | float | Lowest price during the hour (USD) | 394.43 |
+| `VOLUME_FROM` | float | Trading volume in BTC | 459.6 |
+| `VOLUME_TO` | float | Trading volume in USD | 182309.81| |
 
-**Why This Dataset:**
+## **Why This Dataset:**
+This dataset is ideal for building the first version of TradeCare’s Bitcoin price-prediction and trade-risk assessment model. It offers the right balance of data quality, volume, and market relevance for a fast-timeline MVP.
 
-- Bitcoin represents high liquidity and 24/7 trading
-- Public data eliminates user-specific bias present in individual trade logs 
-- Sufficient volatility to demonstrate meaningful prediction capabilities
-- Clean, structured time-series data suitable for ML modeling
+- **High Liquidity & 24/7 Trading**: Bitcoin trades continuously across global markets, providing dense and uninterrupted price data. This ensures the model learns from a complete, non-gapped time series.
+- **Public, Unbiased Market Data:** Using public OHLCV data avoids the behavioral and statistical bias that exists in individual trader logs. Market-wide data reflects real price formation, liquidity shifts, and volatility conditions.
+- **Volatility Suitable for Predictive Modeling:** Bitcoin shows significant short-term volatility as well as mid-term momentum trends. This combination creates enough signal for a model to learn meaningful relationships while still challenging it to generalize.
+- **Cycles & Structural Market Patterns:** Contains cyclical and structural patterns that allow the model to capture both short-term dynamics and long-term trends:
+    - Halving cycles (every ~4 years)
+    - Bull/bear market transitions
+    - Volatility clustering
+    - Institutional regime shifts (e.g., 2024 ETF approval)
+- **Clean, Well-Structured Time-Series Format:**: The dataset contains hourly OHLCV candles in a structured, machine-learning-friendly form. This reduces preprocessing time and makes the pipeline easier to maintain and extend.
 
-## Business Requirements
 
-#### **BR1: Price Movement Prediction**
+# Business Requirements
+
+## **BR1: Price Movement Prediction**
 
 - The client (beginner traders) needs to predict short-term Bitcoin price direction before entering a trade
 - Requires a regression model to predict percentage price change over the next 4 hours
 - Visual representation of predicted vs actual price movements with confidence interpretation
 
-#### **BR2: Trade Profitability Assessment**
+## **BR2: Trade Profitability Assessment**
 
 - The client needs to evaluate whether a potential trade setup is likely to be profitable
 - Requires a classification model to estimate probability of profit
 - Risk scoring system categorizing trades as Low/Medium/High risk
 - Explanation of factors influencing each prediction
 
-#### **BR3: Educational Risk Awareness**
+## **BR3: Educational Risk Awareness**
 
 - The client needs to understand what drives predictions to avoid blind reliance on the model
 - Requires feature importance visualizations showing which technical indicators matter most
