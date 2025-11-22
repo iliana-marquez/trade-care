@@ -82,7 +82,7 @@ The client needs to evaluate whether a potential trade setup is likely to be pro
 
 ## Hypothesis and Validation
 
-### **1: Price Predictability from Technical Indicators**
+### **1. Price Predictability from Technical Indicators**
 Current market technical indicators (RSI, moving averages, volatility, volume) contain sufficient signal to predict 4-hour Bitcoin price movements with better-than-random accuracy.
 
 **Validation:**
@@ -91,7 +91,7 @@ Current market technical indicators (RSI, moving averages, volatility, volume) c
 - Success criteria: RMSE < 2%, MAE < 1.5%
 - Visualize prediction vs actual with scatter plot and residual analysis
 
-### **2: Profitability Classification from Market Conditions**
+### **2. Profitability Classification from Market Conditions**
 Technical feature combinations (RSI levels, trend alignment, volatility, volume) can effectively classify whether a trade would be profitable.
 
 **Validation:**
