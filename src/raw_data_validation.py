@@ -294,7 +294,7 @@ def _validate_timestamps(df):
             f"Expected >= {MIN_TIMESTAMP} (Nov 2014)"
         )
 
-    print(f"Timestamps valid: starts from {df['DATE_STR'].iloc[0]}")
+    print(f"✓ Timestamps valid: starts from {df['DATE_STR'].iloc[0]}")
 
 
 def get_data_info(df):
