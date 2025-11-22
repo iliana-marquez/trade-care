@@ -325,28 +325,36 @@ Page 5: ⚙️ Technical Overview
 6. If the slug size is too large then add large files not required for the app to the .slugignore file.
 
 
-## Main Data Analysis and Machine Learning Libraries
-* Here you should list the libraries you used in the project and provide an example(s) of how you used these libraries.
 
+## Main Data Analysis and Machine Learning Libraries
+
+* **pandas** - Data manipulation, time-series handling, feature engineering with rolling windows. 
+* **numpy** - Numerical computations for feature calculations, array operations. 
+* **scikit-learn** - ML algorithms (RandomForestRegressor, RandomForestClassifier), preprocessing (StandardScaler), model evaluation metrics. 
+* **matplotlib** - Static visualizations (line charts, scatter plots, histograms). 
+* **seaborn** - Statistical visualizations (heatmaps, distribution plots, correlation matrices). 
+* **streamlit** - Interactive web dashboard framework, multipage app structure. 
+* **plotly** - Interactive charts with hover tooltips and zoom. 
+* **joblib** - Model persistence (save/load trained models). 
+
+---
 
 ## Credits 
 
-* In this section, you need to reference where you got your content, media and extra help from. It is common practice to use code from other repositories and tutorials, however, it is important to be very specific about these sources to avoid plagiarism. 
-* You can break the credits section up into Content and Media, depending on what you have included in your project. 
-
 ### Content 
+* CRISP-DM methodology: [Data Science Process Alliance](https://www.datascience-pm.com/crisp-dm-2/)
+* ML terminology and business case framing: Code Institute Predictive Analytics course materials
+* Technical indicators concepts: [Investopedia Technical Analysis Guide](https://www.investopedia.com/technical-analysis-4689657)
 
-- The text for the Home page was taken from Wikipedia Article A
-- Instructions on how to implement form validation on the Sign-Up page were taken from [Specific YouTube Tutorial](https://www.youtube.com/)
-- The icons in the footer were taken from [Font Awesome](https://fontawesome.com/)
+### Data Source
+* Bitcoin Historical Data: GitHub repository by mouadja02 (https://github.com/mouadja02/bitcoin-hourly-ohclv-dataset)
+* Data automatically updated from CryptoCompare API
+* Licensed for educational use
 
-### Media
+---
 
-- The photos used on the home and sign-up page are from This Open-Source site
-- The images used for the gallery page were taken from this other open-source site
-
-
-
-## Acknowledgements (optional)
-* Thank the people who provided support through this project.
-
+## Acknowledgements
+* **Code Institute** - For providing the Predictive Analytics curriculum and project assessment framework, as well as the project template including the readme format.
+* **My Parter** - Which recently introduced me to to world of trading and focused my project goals towards secure, transparent and data-driven trading
+* **Trading Community** - For insights into beginner trader challenges that motivated this project's focus on risk awareness
+* **GitHub Community** - For providing accessible financial datasets and best practices for time-series ML projects
