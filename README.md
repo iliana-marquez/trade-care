@@ -267,6 +267,35 @@ These visualizations ensure data quality and feature correctness before model tr
 
 ## Dashboard Design
 
+Page 1: 📊 Project Summary
+* Overview & business requirements
+* Dataset information
+* Key findings (honest metrics)
+* Important disclaimers
+
+Page 2: 📈 Data Study
+* Correlation analysis
+* Feature importance charts
+* Data quality notes
+
+Page 3: 🎯 Price & Trade Predictor
+* 14 interactive sliders
+* BR1 regression prediction
+* BR2 classification prediction
+* Risk assessment
+
+Page 4: 🔬 Hypothesis Validation
+* H1: Price predictability (NOT VALIDATED)
+* H2: Profitability prediction (NOT VALIDATED)
+* H3: Data quality (PARTIAL)
+* Scientific value explanation
+
+Page 5: ⚙️ Technical Overview
+* Model specifications
+* Performance metrics
+* Tech stack
+* Assessment criteria met
+
 
 ## Knonw Issues & Unfixed Bugs
 1. Negative R² Score in Regression Model
