@@ -18,7 +18,7 @@ Many new traders lose money by following emotions, social-media hype from “inv
 > [!WARNING]  
 > **Important Disclaimer:** TradeCare is an educational tool for risk awareness and decision support. It does not provide financial advice and should not be used as the sole basis for trading decisions.
 
-# Dataset Content
+## Dataset Content
 
 TradeCare uses publicly available cryptocurrency market data (OHLCV - Open, High, Low, Close, Volume) for Bitcoin (BTC-USD) with 1-hour candle intervals.
 
@@ -45,7 +45,7 @@ The dataset contains the following raw columns:
 | `VOLUME_FROM` | float | Trading volume in BTC | 459.6 |
 | `VOLUME_TO` | float | Trading volume in USD | 182309.81| |
 
-## **Why This Dataset:**
+**Why This Dataset:**
 This dataset is ideal for building the first version of TradeCare’s Bitcoin price-prediction and trade-risk assessment model. It offers the right balance of data quality, volume, and market relevance for a fast-timeline MVP.
 
 - **High Liquidity & 24/7 Trading**: Bitcoin trades continuously across global markets, providing dense and uninterrupted price data. This ensures the model learns from a complete, non-gapped time series.
@@ -59,31 +59,48 @@ This dataset is ideal for building the first version of TradeCare’s Bitcoin pr
 - **Clean, Well-Structured Time-Series Format:**: The dataset contains hourly OHLCV candles in a structured, machine-learning-friendly form. This reduces preprocessing time and makes the pipeline easier to maintain and extend.
 
 
-# Business Requirements
+## Business Requirements
 
-## **BR1: Price Movement Prediction**
+### **1. Price Movement Prediction**
+The client needs to predict short-term Bitcoin price direction before entering a trade
 
-- The client (beginner traders) needs to predict short-term Bitcoin price direction before entering a trade
+**Implementation:**
 - Requires a regression model to predict percentage price change over the next 4 hours
-- Visual representation of predicted vs actual price movements with confidence interpretation
+- Visual representation of predicted vs actual price movements with confidence 
 
-## **BR2: Trade Profitability Assessment**
+**Benefit:** Helps traders set realistic take-profit and stop-loss levels based on expected price movement
 
-- The client needs to evaluate whether a potential trade setup is likely to be profitable
+### **2. Trade Profitability Assessment**
+The client needs to evaluate whether a potential trade setup is likely to be profitable
+
+**Implementation:**
 - Requires a classification model to estimate probability of profit
 - Risk scoring system categorizing trades as Low/Medium/High risk
 - Explanation of factors influencing each prediction
 
-## **BR3: Educational Risk Awareness**
+**Benefit:** Helps traders set realistic take-profit and stop-loss levels based on expected price movement
 
-- The client needs to understand what drives predictions to avoid blind reliance on the model
-- Requires feature importance visualizations showing which technical indicators matter most
-- Model performance metrics demonstrating prediction reliability and limitations
-- Clear explanations preventing "magic formula" thinking and promoting critical evaluation
+## Hypothesis and Validation
+
+### **1: Price Predictability from Technical Indicators**
+Current market technical indicators (RSI, moving averages, volatility, volume) contain sufficient signal to predict 4-hour Bitcoin price movements with better-than-random accuracy.
+
+**Validation:**
+- Train regression model on historical data (2014-2025)
+- Compare model RMSE and MAE against naive baseline (last price carried forward)
+- Success criteria: RMSE < 2%, MAE < 1.5%
+- Visualize prediction vs actual with scatter plot and residual analysis
+
+### **2: Profitability Classification from Market Conditions**
+Technical feature combinations (RSI levels, trend alignment, volatility, volume) can effectively classify whether a trade would be profitable.
+
+**Validation:**
+- Train classification model on historical trades (simulated from price data)
+- Measure ROC-AUC score (target > 0.60 to show predictive value above random)
+- Analyze feature importance to identify key contributors
+- Evaluate confusion matrix and precision/recall balance
 
 
-## Hypothesis and how to validate?
-* List here your project hypothesis(es) and how you envision validating it (them) 
 
 
 ## The rationale to map the business requirements to the Data Visualizations and ML tasks
