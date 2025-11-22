@@ -75,7 +75,7 @@ The client needs to evaluate whether a potential trade setup is likely to be pro
 
 **Implementation:**
 - Requires a classification model to estimate probability of profit
-- Risk scoring system categorizing trades as Low/Medium/High risk
+- Risk scoring system categorizing trades as Profitable/Non-Profitable
 - Explanation of factors influencing each prediction
 
 **Benefit:** Helps traders set realistic take-profit and stop-loss levels based on expected price movement
@@ -102,23 +102,184 @@ Technical feature combinations (RSI levels, trend alignment, volatility, volume)
 
 
 
-
 ## The rationale to map the business requirements to the Data Visualizations and ML tasks
-* List your business requirements and a rationale to map them to the Data Visualizations and ML tasks
 
+### BR1: Price Movement Prediction → Regression Model + Scatter Plot
+
+**Business Requirement:**
+Predict 4-hour Bitcoin price movement percentage to help traders set stop-loss and take-profit levels.
+
+**Mapped ML Task:**
+* **Type:** Supervised Learning - Regression
+* **Model:** Linear Regression
+* **Target:** `target_return_simple` (continuous percentage change)
+* **Features:** 14 technical indicators (momentum, trend, volume, volatility)
+
+**Data Visualizations:**
+* **Scatter Plot (Predicted vs Actual):** Shows model's ability to predict returns
+  - Perfect predictions lie on diagonal line
+  - Scatter pattern reveals prediction accuracy
+  - Separate plots for train/test sets show generalization
+* **Correlation Heatmap:** Identifies which features correlate with price returns
+  - Guides feature selection
+  - Validates relevance of technical indicators
+  - Supports hypothesis testing
+
+**Rationale:**
+Regression is appropriate because the output is continuous (percentage change can be any value from -20% to +20%). Scatter plots effectively communicate prediction quality to both technical and non-technical stakeholders. The visualization immediately shows whether the model can predict better than random guessing.
+
+---
+
+### BR2: Trade Profitability Assessment → Classification Model + Confusion Matrix
+
+**Business Requirement:**
+Predict whether a trade setup will be profitable (binary yes/no) to support beginner decision-making.
+
+**Mapped ML Task:**
+* **Type:** Supervised Learning - Binary Classification
+* **Model:** Logistic Regression
+* **Target:** `target_profitable` (0 = not profitable, 1 = profitable)
+* **Features:** Same 14 technical indicators
+
+**Data Visualizations:**
+* **Confusion Matrix:** Shows true positives, false positives, true negatives, false negatives
+  - Reveals if model is biased toward one class
+  - Identifies type of errors being made
+  - Essential for imbalanced datasets
+* **ROC Curve + AUC Score:** Evaluates classifier performance across thresholds
+  - AUC > 0.5 indicates better than random
+  - Visual comparison against baseline (random classifier)
+  - Standard metric in binary classification
+* **Feature Correlation Bar Chart:** Shows which features predict profitability
+  - Supports both BR1 and BR2
+  - Educational value for users understanding technical indicators
+
+**Rationale:**
+Classification simplifies the complex prediction problem into actionable yes/no decision. Confusion matrix and ROC curve are industry-standard visualizations that allow honest assessment of model performance. These visualizations clearly show the 51% accuracy result and near-random performance, providing educational value about prediction difficulty.
+
+---
+
+### Supporting Visualizations
+
+**Feature Engineering Phase:**
+* **Return Statistics:** Validates that calculated returns match Bitcoin's volatility patterns
+* **RSI Distribution:** Confirms indicator oscillates between 0-100 as expected
+* **Moving Average Trends:** Shows trend-following behavior of MA indicators
+* **Volume Spike Detection:** Identifies unusual trading activity
+
+**Data Cleaning Phase:**
+* **OHLC Validation Charts:** Confirms price logic (High ≥ Low, etc.)
+* **Time Gap Analysis:** Identifies continuous vs fragmented data periods
+* **Historical Event Verification:** Validates data accuracy against known Bitcoin events
+
+**Rationale:**
+These visualizations ensure data quality and feature correctness before model training. They provide evidence of rigorous data preparation and support reproducibility.
+
+---
 
 ## ML Business Case
-* In the previous bullet, you potentially visualized an ML task to answer a business requirement. You should frame the business case using the method we covered in the course 
 
+### Business Case 1: Price Movement Prediction (Regression)
+
+#### 1. Business Objectives
+**Primary Goal:** Provide beginner traders with estimated 4-hour price movement to inform stop-loss and take-profit placement.
+
+**Target Audience:** 
+* Novice cryptocurrency traders lacking risk management experience
+* Users seeking data-driven guidance instead of emotional decision-making
+* Educational users learning about ML limitations in financial markets
+
+**Business Value:**
+* Reduces uninformed trading decisions
+* Provides realistic expectations about prediction difficulty
+* Educational tool demonstrating market efficiency
+
+#### 2. Problem Definition
+**Current Situation:** Beginner traders often enter positions without understanding likely price movement, leading to poorly placed stop-losses and unrealistic profit targets.
+
+**Desired Outcome:** ML system predicts percentage price change over next 4 hours, allowing traders to set appropriate risk parameters.
+
+**Success Criteria:**
+* RMSE < 2% (acceptable prediction error)
+* MAE < 1.5% (acceptable average error)  
+* R² > 0.3 (explains >30% of variance)
+
+**Actual Performance:**
+* RMSE: 0.98% ✓ (acceptable)
+* MAE: 0.66% ✓ (acceptable)
+* R²: -0.037 ✗ (no predictive power)
+
+#### 3. Learning Method
+**Supervised Learning - Regression**
+* Input: 14 engineered features from OHLCV data
+* Output: Continuous value (percentage return)
+* Algorithm: Linear Regression (baseline model)
+* Training approach: Time-series split (80/20 train/test)
+
+**Why This Method:**
+* Simple, interpretable baseline
+* No hyperparameter tuning required (time-constrained project)
+* Fast training for iteration
+* Standard approach for continuous prediction
+
+#### 4. Training Data
+**Source:** Bitcoin hourly OHLCV data (mouadja02/bitcoin-hourly-ohclv-dataset)
+
+**Timeframe:** 2020-2025 (5 years, ~48,000 samples)
+* Gap-free continuous data
+* Modern market structure (post-ETF, institutional adoption)
+* Includes multiple market cycles (bull, bear, recovery)
+
+**Features (14 total):**
+* Price momentum: return_1h, return_4h, return_12h, return_24h
+* Trend indicators: RSI, ma_10, ma_20, ma_50, dist_from_ma10, dist_from_ma20
+* Volume signals: volume_change, volume_ratio
+* Volatility measures: volatility_24h, price_range
+
+**Target:** 4-hour ahead percentage return (shift(-4))
+
+**Data Quality:**
+* 95.4% retention after cleaning
+* Zero time gaps in 2020-2025 period
+* Validated against historical events
+
+#### 5. Heuristics and Assumptions
+**Market Assumptions:**
+* Technical indicators contain predictive information (tested via H1)
+* Recent data more relevant than historical (2020+ focus)
+* 4-hour timeframe balances signal vs noise
+
+**Feature Engineering Assumptions:**
+* Momentum indicators capture trend continuation
+* Mean reversion captured by MA distance
+* Volume changes indicate conviction
+* Volatility measures risk
+
+**Model Assumptions:**
+* Linear relationships between features and returns
+* Stationarity within training window
+* Past patterns repeat in future
+
+**Limitations Discovered:**
+* Market exhibits near-random walk at 4-hour scale
+* Linear model insufficient for complex price dynamics
+* Technical indicators alone lack predictive power
 
 ## Dashboard Design
-* List all dashboard pages and their content, either blocks of information or widgets, like buttons, checkboxes, images, or any other item that your dashboard library supports.
-* Later, during the project development, you may revisit your dashboard plan to update a given feature (for example, at the beginning of the project you were confident you would use a given plot to display an insight but subsequently you used another plot type).
 
 
+## Knonw Issues & Unfixed Bugs
+1. Negative R² Score in Regression Model
+**Issue:** R² = -0.037 (negative indicates model predicts worse than baseline mean)
+**Why Unfixed:** This is not a bug—it is a valid finding. The model mathematically works correctly; the market data simply does not contain sufficient predictive signal for the model to beat a naive baseline at 4-hour timeframes.
+**Impact:** Regression predictions have no reliability for actual trading decisions.
+**Mitigation:** Dashboard includes prominent warnings about weak predictive power. Educational framing emphasizes negative results are scientifically valid.
 
-## Unfixed Bugs
-* You will need to mention unfixed bugs and why they were not fixed. This section should include shortcomings of the frameworks or technologies used. Although time can be a significant variable to consider, paucity of time and difficulty understanding implementation is not a valid reason to leave bugs unfixed.
+2. Classification Model Near-Random Performance
+**Issue:** 51% accuracy (only 1% better than coin flip), ROC-AUC = 0.5375
+**Why Unfixed:** Not a bug—reflects true difficulty of binary direction prediction at short timescales. The classification pipeline is technically correct; the problem itself is extremely hard.
+**Impact:** Binary predictions unreliable for decision-making.
+**Mitigation:** Probability outputs centered near 0.5 (50%) make uncertainty explicit. Dashboard disclaimers prevent misuse.
 
 ## Deployment
 ### Heroku
